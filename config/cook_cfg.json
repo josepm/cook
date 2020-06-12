@@ -1,0 +1,157 @@
+{
+  "ssh_args": [
+    "i-02a6d200ed4b927a7.inst.aws.us-east-1.prod.musta.ch",
+    "i-0c1cea13ae94ac818.inst.aws.us-east-1.prod.musta.ch"
+  ],
+  "_ssh_args": {
+    "permament": [
+      "i-0b3ee594b8f894cc7.inst.aws.us-east-1.prod.musta.ch",
+      "i-0e6b4e41122d79cf5.inst.aws.us-east-1.prod.musta.ch",
+      "i-0dcee29f97ce8a1fb.inst.aws.us-east-1.prod.musta.ch",
+      "i-02a6d200ed4b927a7.inst.aws.us-east-1.prod.musta.ch",
+      "i-0bb8167f381f298e6.inst.aws.us-east-1.prod.musta.ch",
+      "i-0a5b07bfbe49ee063.inst.aws.us-east-1.prod.musta.ch",
+      "i-05e2b3aab1f0885c0.inst.aws.us-east-1.prod.musta.ch",
+      "i-0c1cea13ae94ac818.inst.aws.us-east-1.prod.musta.ch",
+      "i-05e2b3aab1f0885c0.inst.aws.us-east-1.prod.musta.ch"
+    ],
+    "temporary": [
+      "i-07200b6f8e10fe53d.inst.aws.us-east-1.prod.musta.ch"
+    ],
+    "small": [
+    ]
+  },
+  "test": false,
+  "earliest_date": "2016-01-01",
+  "repo_path": "my_repos/capacity_planning/",
+  "launch": {
+    "tickets": {
+      "cmd": ["tickets", "/", "wh_tickets", []],
+      "cfg": null,
+      "set_keys": ["cook", "/", "multi_keys",
+        ["~/my_repos/capacity_planning/tickets/config/multi_keys_cfg_tix.json"]
+      ],
+      "keys": null
+    },
+    "agents": {
+      "cmd": ["agents", "/", "wh_agents", []],
+      "cfg": null,
+      "set_keys": ["cook", "/", "multi_keys",
+        ["~/my_repos/capacity_planning/agents/config/multi_keys_cfg_ag.json"]
+      ],
+      "keys": null
+    },
+    "forecast": {
+      "cmd": ["forecast", "/", "w_ts_process", []],
+      "cfg": "~/my_repos/capacity_planning/forecast/config/w_ts_process_cfg.json",
+      "keys": {"ts_names": ["tba", "tis", "tta"], "groups": "~/my_repos/capacity_planning/grouping/config/h_grouper_cfg.json"}
+    },
+    "crossval": {
+      "cmd": ["forecast", "/", "cross_validation", []],
+      "cfg": "~/my_repos/capacity_planning/forecast/config/cross_validation_cfg.json",
+      "keys": {"ts_names": ["tba"], "groups": "~/my_repos/capacity_planning/grouping/config/h_grouper_cfg.json"}
+    },
+    "raw_interactions": {
+      "cmd": ["interactions", "/", "raw_interactions", []],
+      "cfg": "~/my_repos/capacity_planning/interactions/config/raw_interactions_cfg.json",
+      "keys": true
+    },
+    "clean_interactions": {
+      "cmd": ["interactions", "/", "clean_interactions", []],
+      "cfg": "~/my_repos/capacity_planning/interactions/config/clean_interactions_cfg.json",
+      "keys": true
+    },
+    "daily_groups": {
+      "cmd": ["grouping", "/", "w_grouper", []],
+      "cfg": "~/my_repos/capacity_planning/grouping/config/w_grouper_cfg.json",
+      "keys": true
+    },
+    "kill": {
+      "cmd": ["cook", "/", "kill_script", []],
+      "cfg": null,
+      "keys": null
+    },
+    "load": {
+      "cmd": ["", "", "", []],
+      "rsync": ["agents", "cook", "data", "forecast", "queueing", "utilities"],
+      "cfg": null,
+      "keys": null
+    },
+    "lang_train_fcast": {
+      "cmd": ["forecast/interactions_forecast", "/","lang_train_fcast", [""]],
+      "cfg": null,
+      "-set_keys": ["cook", "/", "lang_keys", [""]],
+      "+set_keys": ["cook", "/", "lang_keys", ["phone-inbound-vol", "2018-08-01"]],
+      "++set_keys": ["cook", "/", "lang_keys", ["", "phone-inbound-aht", "2018-08-01"]],
+      "+++set_keys": ["cook", "/", "lang_keys", ["", "phone-outbound-vol", "2018-08-01"]],
+      "+++++set_keys": ["cook", "/", "lang_keys", ["", "phone-outbound-aht", "2018-08-01"]]
+    },
+    "lang_fcast": {
+      "cmd": ["forecast", "/","lang_forecast", []],
+      "cfg": null,
+      "---set_keys": ["cook", "/", "lang_fcast_keys", ["\"[booking_count, checkin_count]\"",
+        "\"[2020-03-28 1]\""]
+      ],
+      "--set_keys": ["cook", "/", "lang_fcast_keys", ["\"[booking_count, checkin_count, tenure]\"",
+        "\"[2019-01-26 1, 2019-02-23 1, 2019-03-30 1, 2019-04-27 1]\""]
+      ],
+      "set_keys": ["cook", "/", "lang_fcast_keys", ["\"[checkin_count, booking_count, tenure]\"",
+        "\"[2019-01-26 1, 2019-02-23 1, 2019-03-30 1, 2019-04-27 1, 2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1]\""]
+      ],
+      "++set_keys": ["cook", "/", "lang_fcast_keys", ["\"[ticket_count_China, prod_hours_China]\"",
+        "\"[2019-05-25 1 , 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1]\""]
+      ],
+      "-set_keys": ["cook", "/", "lang_fcast_keys", ["\"[ticket_count, ticket_count_Homes, ticket_count_China, ticket_count_Experiences]\"",
+        "\"[2019-05-25 1 , 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1]\""]
+      ],
+      "----set_keys": ["cook", "/", "lang_fcast_keys", ["\"[prod_hours, prod_hours_Homes, prod_hours_China, prod_hours_Experiences]\"",
+        "\"[2019-05-25 1 , 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1]\""]
+      ]
+    },
+    "ens_fcast": {
+      "cmd": ["forecast", "/","ens_forecast", []],
+      "cfg": null,
+      "set_keys": ["cook", "/", "lang_fcast_keys", ["\"[booking_count, checkin_count, tenure]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1, 2020-03-28 1]\""]
+      ],
+      "--set_keys": ["cook", "/", "lang_fcast_keys", ["\"[ticket_count, ticket_count_Homes, ticket_count_China, ticket_count_Experiences]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1, 2020-03-28 1]\""]
+      ],
+      "+++set_keys": ["cook", "/", "lang_fcast_keys", ["\"[prod_hours, prod_hours_Homes, prod_hours_China, prod_hours_Experiences]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1, 2020-03-28 1]\""]
+      ]
+    },
+    "ratio_fcast": {
+      "cmd": ["forecast", "/","ratio_forecast", []],
+      "cfg": null,
+      "set_keys": ["cook", "/", "lang_fcast_keys", ["\"[ticket_count 1]\""]
+      ]
+    },
+    "fcast_perf": {
+      "cmd": ["forecast/utilities/language", "/","fcast_perf", []],
+      "cfg": null,
+      "+set_keys": ["cook", "/", "lang_fcast_keys",  ["\"[prod_hours, prod_hours_Homes, prod_hours_China, prod_hours_Experiences]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1]\""]
+      ],
+      "-set_keys": ["cook", "/", "lang_fcast_keys",  ["\"[ticket_count, ticket_count_Homes, ticket_count_China, ticket_count_Experiences]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1]\""]
+      ],
+      "set_keys": ["cook", "/", "lang_fcast_keys",  ["\"[booking_count, checkin_count, tenure]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1]\""]
+      ]
+    },
+    "fcast_perf_detail": {
+      "cmd": ["forecast/utilities/language", "/","fcast_perf_detail", []],
+      "cfg": null,
+      "++set_keys": ["cook", "/", "lang_fcast_keys",  ["\"[prod_hours, prod_hours_Homes, prod_hours_China, prod_hours_Experiences]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1, 2020-03-28 1]\""]
+      ],
+      "+set_keys": ["cook", "/", "lang_fcast_keys",  ["\"[ticket_count, ticket_count_Homes, ticket_count_China, ticket_count_Experiences]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1, 2020-03-28 1]\""]
+      ],
+      "set_keys": ["cook", "/", "lang_fcast_keys", ["\"[booking_count, checkin_count, tenure]\"",
+        "\"[2019-05-25 1, 2019-06-29 1, 2019-07-27 1, 2019-08-31 1, 2019-09-28 1, 2019-10-26 1, 2019-11-30 1, 2019-12-28 1, 2020-01-25 1, 2020-02-29 1, 2020-03-28 1]\""]
+      ]
+    }
+  }
+}
